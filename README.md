@@ -1,1 +1,1 @@
-# GoGopherQueue-GGQ-
+# GoGopherQueue-GGQ
