@@ -1,8 +1,8 @@
 package job
 
-type Job struct{
-	ID string
-	Type string
+type Job struct {
+	ID      string
+	Type    string
 	Payload string
-	Status string
+	Status  string
 }
