@@ -7,12 +7,14 @@ import (
 )
 
 func main() {
-	newJob := job.Job{
-		ID:      "job-123",
-		Type:    "email",
-		Payload: "send welcome email",
-		Status:  "queued",
-	}
+
+	service := job.NewService()
+	newJob := service.CreateJob(
+		"job-123",
+		"email", 
+		"send welcome email",
+	)
+	
 
 	fmt.Println(newJob)
 }
