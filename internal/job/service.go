@@ -44,8 +44,10 @@ func (s *Service) GetJob(id string) (Job, error){
 func (s *Service) DeleteJob(id string)(Job, error){
 	for i, job := range s.jobs{
 		if job.ID == id{
-			s.jobs = append(s.jobs[:i],s.jobs[i+1:]...)
-			return job,nil
+			err := s.repo.Delete(job)
+		if err != nil {
+			return Job{}, err
+			}
 		}
 	}
 	return Job{},fmt.Errorf("job with id %s not found",id)
