@@ -4,11 +4,14 @@ import (
 	"fmt"
 
 	"GoGopherQueue-GGQ/internal/job"
+	"GoGopherQueue-GGQ/internal/repository"
 )
 
 func main() {
+	repo := repository.NewMemoryRepository()
 
-	service := job.NewService()
+	service := job.NewService(repo)
+
 	service.CreateJob(
 		"job-123",
 		"email", 
@@ -24,9 +27,18 @@ func main() {
 
 	if err != nil {
 		fmt.Println("Error:", err)
+	}else{
+	fmt.Println(job)
+	}
+
+	deletedJob, err := service.DeleteJob("job-999")
+
+	if err != nil {
+		fmt.Println("Error:", err)
 		return
 	}
+
+	fmt.Println("Deleted:", deletedJob)
 	
 
-	fmt.Println(job)
 }
