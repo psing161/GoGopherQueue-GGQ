@@ -1,17 +1,14 @@
 package job
 
-import "fmt"
-import "GoGopherQueue-GGQ/internal/repository"
-
-type Service struct{
-	repo repository.Repository
+type Service struct {
+	repo Repository
 
 }
 
-func NewService(repo repository.Repository) *Service {
-    return &Service{
-        repo: repo,
-    }
+func NewService(repo Repository) *Service {
+	return &Service{
+		repo: repo,
+	}
 }
 
 func (s *Service) CreateJob(id string, jobType string, payload string) (Job, error) {
@@ -29,27 +26,15 @@ func (s *Service) CreateJob(id string, jobType string, payload string) (Job, err
 
 	return newJob, nil
 }
+
 func (s *Service) GetJobs() []Job {
 	return s.repo.GetAll()
 }
-func (s *Service) GetJob(id string) (Job, error){
-	for _, job := range s.jobs {
-		if job.ID == id{
-			return job, nil
-		}
-	}
-	return Job{}, fmt.Errorf("job with id %s not found", id)
+
+func (s *Service) GetJob(id string) (Job, error) {
+	return s.repo.Get(id)
 }
 
-func (s *Service) DeleteJob(id string)(Job, error){
-	for i, job := range s.jobs{
-		if job.ID == id{
-			err := s.repo.Delete(job)
-		if err != nil {
-			return Job{}, err
-			}
-		}
-	}
-	return Job{},fmt.Errorf("job with id %s not found",id)
-
+func (s *Service) DeleteJob(id string) error {
+	return s.repo.Delete(id)
 }
