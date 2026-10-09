@@ -1,10 +1,8 @@
-package repository
-
-import (
-	"testing"
-
-	"GoGopherQueue-GGQ/internal/job"
-
+package repository 
+import ( 
+	"testing" 
+	"GoGopherQueue-GGQ/internal/job" 
+	"GoGopherQueue-GGQ/internal/repository" 
 )
 
 func TestCreateAndGetJob(t * testing.T){
